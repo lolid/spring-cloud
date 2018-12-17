@@ -15,3 +15,11 @@ spring:
 product-service:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+#设置feign的超时时间
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 11000

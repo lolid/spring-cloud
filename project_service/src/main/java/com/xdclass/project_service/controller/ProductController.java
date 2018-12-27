@@ -39,11 +39,11 @@ public class ProductController {
     @GetMapping("find")
     public Object findById(@RequestParam int id) {
 
-        try {
-            TimeUnit.SECONDS.sleep(8);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            TimeUnit.SECONDS.sleep(8);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         Product product = productService.findById(id);
         Product result = new Product();

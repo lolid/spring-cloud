@@ -2,6 +2,7 @@ package com.xdclass.order_service.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.xdclass.order_service.domain.ProductOrder;
+import com.xdclass.order_service.service.ProductClient;
 import com.xdclass.order_service.service.ProductOrderService;
 import com.xdclass.order_service.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Service
-public class ProductOrderImpl implements ProductOrderService {
+public class ProductOrderServiceImpl implements ProductOrderService {
 
 
 //    @Autowired
@@ -44,8 +45,12 @@ public class ProductOrderImpl implements ProductOrderService {
 
 
 
-
+        //调用订单服务
         String response = productClient.findById(productId);
+
+        //调用用户服务，主要是获取用户名称，用户的级别或者积分信息
+        //TODO
+
 
         //转成jsonNode
         JsonNode jsonNode = JsonUtils.str2JsonNode(response);

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.UUID;
 
-@Service
+@Service(value = "productOrderService")
 public class ProductOrderServiceImpl implements ProductOrderService {
 
 
@@ -23,7 +23,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
      * 注入 productClient
      */
     @Autowired
-    private ProductClient productClient;
+     private ProductClient productClient;
 
     /**
      * 下单业务
@@ -54,7 +54,6 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 
         //转成jsonNode
         JsonNode jsonNode = JsonUtils.str2JsonNode(response);
-
 
 
         ProductOrder productOrder = new ProductOrder();

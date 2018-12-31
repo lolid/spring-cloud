@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "product-service", fallback = ProductClientFallback.class)
 public interface ProductClient {
 
-    @GetMapping("api/v1/product/find")
+    @GetMapping("/api/v1/product/find")
     String findById(@RequestParam(value = "id") int id);
 }

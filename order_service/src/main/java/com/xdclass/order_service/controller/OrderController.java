@@ -4,6 +4,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.xdclass.order_service.service.ProductOrderService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("api/v1/order")
 public class OrderController {
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
     @Autowired
     private ProductOrderService productOrderService;
 
@@ -35,15 +38,14 @@ public class OrderController {
         //监控报警
         String saveOrderKey = "save-order";
 
-        //String sendValue = redisTemplate.opsForValue().get(saveOrderKey);
-        String sendValue = null;
+        String sendValue = redisTemplate.opsForValue().get(saveOrderKey);
 
         //新建线程 异步调用 ，可以使用线程池
         new Thread(() -> {
             if (StringUtils.isBlank(sendValue)) {
                 System.out.println("紧急通知，用户下单失败，青立即查找原因");
                 //发送 http 请求，调用短信服务 TODO
-                //redisTemplate.opsForValue().set(saveOrderKey, "save-order-fail", 20, TimeUnit.SECONDS);
+                redisTemplate.opsForValue().set(saveOrderKey, "save-order-fail", 20, TimeUnit.SECONDS);
             } else {
                 System.out.println("已经发送过短信，20 秒内不重新发送");
             }

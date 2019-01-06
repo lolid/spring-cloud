@@ -16,6 +16,13 @@ spring:
     host: 127.0.0.1
     pool: 6379
     timeout: 2000
+  #指定zipkin的地址
+  zipkin:
+    base-url: http://localhost:9411/
+  #指定采样的百分比
+  sleuth:
+    sampler:
+      probability: 0.5
 
 
 #自定义负载均衡策略

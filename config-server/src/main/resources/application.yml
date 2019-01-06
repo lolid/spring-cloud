@@ -1,0 +1,23 @@
+#服务名称
+spring:
+  application:
+    name: config-server
+  #git配置
+  cloud:
+    config:
+      server:
+        git:
+          url: https://github.com/lolid/config-cloud
+          username:
+          password:
+
+#服务的端口号
+server:
+  port: 9100
+
+
+#注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
